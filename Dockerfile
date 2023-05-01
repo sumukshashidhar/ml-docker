@@ -14,8 +14,8 @@ RUN apt-get update && \
     pip install ipykernel && \
     python -m ipykernel install --name python3.10 --display-name "Python 3.10"
 
-# Launch Jupyter Notebook
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+# Launch Jupyter Lab
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
 
 # Mount current working directory
 WORKDIR /workspace
