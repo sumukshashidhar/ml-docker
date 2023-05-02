@@ -1,6 +1,7 @@
 FROM nvcr.io/nvidia/pytorch:23.04-py3
 
 # Install and update Python 3.10
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
@@ -12,7 +13,8 @@ RUN apt-get update && \
     python get-pip.py && \
     rm get-pip.py && \
     pip install ipykernel && \
-    python -m ipykernel install --name python3.10 --display-name "Python 3.10"
+    python -m ipykernel install --name python3.10 --display-name "Python 3.10" && \
+    pip install jupyterlab
 
 # Launch Jupyter Lab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
