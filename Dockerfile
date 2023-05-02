@@ -16,6 +16,15 @@ RUN apt-get update && \
     python -m ipykernel install --name python3.10 --display-name "Python 3.10" && \
     pip install jupyterlab
 
+
+# Install the latest version of Node.js
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get update && apt-get install -y nodejs
+
+# Install pandas, plotly, and matplotlib, pytorch
+RUN pip install pandas plotly matplotlib torch torchvision torchaudio scikit-learn scipy cupy cudf-cu11 --extra-index-url=https://pypi.nvidia.com
+
+
 # Launch Jupyter Lab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
 
